@@ -1,0 +1,37 @@
+specVersion: 0.0.4
+features:
+  - fullTextSearch
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: NFT
+    network: mumbai
+    source:
+      address: "0xD643434F8AD8Bb386Be43Ca526E477cd5202A2AD"
+      abi: NFT
+      startBlock: 26561500  
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - ApprovalForAll
+        - Transfer
+        - buyed
+        - NFTToken
+        - User
+      abis:
+        - name: NFT
+          file: ./abis/NFT.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+        - event: buyed(address,uint256,address,uint256,address,uint256)
+          handler: handlebuyed
+      file: ./src/mapping.ts

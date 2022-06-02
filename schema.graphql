@@ -1,0 +1,27 @@
+type _Schema_
+  @fulltext(
+    name: "tokenSearch"
+    language: en
+    algorithm: rank
+    include: [{ entity: "NFTToken", fields: [{ name: "title" }, { name: "description" }] }]
+  )
+
+type NFTToken @entity {
+  id: ID!
+  creator: User!
+  title: String
+  description: String
+  media: String
+  price: BigInt
+  json: String
+  on_sale: Boolean
+  token_id: BigInt!
+  owner: User!
+  last_change: BigInt!
+}
+
+type User @entity {
+  id: ID!
+  tokens: [NFTToken!]! @derivedFrom(field: "owner")
+  created: [NFTToken!]! @derivedFrom(field: "creator")
+}
