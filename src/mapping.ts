@@ -90,6 +90,15 @@ export function handleTransfer(event: Transfer): void {
     }
 
     token.last_change = event.block.timestamp;
+  } else {
+    let tokenContract = NFT.bind(event.address);
+    const tokenInfo = tokenContract.getItemInfo(event.params.tokenId)[0];
+    const owner = tokenContract.ownerOf(token.token_id);
+
+    // when new token generated creator is owner
+    token.owner = owner.toHexString();
+    token.on_sale = tokenContract.getItemInfo(event.params.tokenId)[0].onSale;
+    token.last_change = event.block.timestamp;
   }
   token.save();
 
