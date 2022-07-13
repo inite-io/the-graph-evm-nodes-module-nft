@@ -98,6 +98,7 @@ export function handleTransfer(event: Transfer): void {
     // when new token generated creator is owner
     token.owner = owner.toHexString();
     token.on_sale = tokenContract.getItemInfo(event.params.tokenId)[0].onSale;
+    token.price = tokenContract.getItemInfo(event.params.tokenId)[0].price;
     token.last_change = event.block.timestamp;
   }
   token.save();
