@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: NFT
-    network: mumbai
+    network: aurora-testnet
     source:
-      address: "0xD643434F8AD8Bb386Be43Ca526E477cd5202A2AD"
+      address: "0x0a40db4b66ee040e74b89f1d03d42442d08e5014"
       abi: NFT
-      startBlock: 26561500  
+      startBlock: 83441542
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
